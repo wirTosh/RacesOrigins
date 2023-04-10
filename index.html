@@ -1,5 +1,42 @@
 <html lang="en">
 <head>
+
+<body>
+<div>
+    <div>
+        <h1 id="server-ip"><span style="color:#ffffff"><strong>IP: racesorigins.com</span></h1>
+        <span id="motd">A beautiful minecraft server</span>
+        <div><strong><span id="player-count", style="color:#ffffff", style="font-size:24px"></span><span style="color:#ffffff"><strong><span style="font-size:24px"> Players Online</span></strong></span></p></div>
+
+
+    </div>
+</div>
+<script>
+function initServerData(serverIp,serverPort){
+console.log('https://mcapi.us/server/status?ip='+serverIp+'&port='+serverPort);
+    fetch('https://mcapi.us/server/status?ip='+serverIp+'&port='+serverPort)
+    .then(response => response.json())
+    .then(data => handleServerStatus(data));
+
+    function handleServerStatus(data){
+    const motd = document.getElementById("motd");
+    motd.innerHTML = data.motd;
+
+    const playerCounter = document.getElementById("player-count");
+    playerCounter.innerHTML = data.players.now;
+
+    const logo = document.getElementById("server-icon");
+    logo.src = data.favicon;
+
+}
+}
+
+
+initServerData("racesorigins.com","25565");
+</script>
+</body>
+
+
     <meta charset="UTF-8">
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
